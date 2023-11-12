@@ -33,7 +33,7 @@ func _process(_delta):
 func movement():
 	# Gravity
 	if !is_on_floor():
-		velocity.y += gravity
+		velocity.y += gravity 
 	elif is_on_floor():
 		jump_count = max_jump_count
 	
@@ -47,26 +47,25 @@ func movement():
 # Handles jumping functionality (double jump or single jump, can be toggled from inspector)
 func handle_jumping():
 	if Input.is_action_just_pressed("Jump"):
-		if is_on_floor() and !double_jump:
-			jump()
-		elif double_jump and jump_count > 0:
+		if double_jump and jump_count > 0:
 			jump()
 			jump_count -= 1
+		elif is_on_floor() and !double_jump:
+			jump()
 
 # Player jump
 func jump():
 	jump_tween()
-	AudioManager.jump_sfx.play()
 	velocity.y = -jump_force
-
+	$JumpSound.playing = true
 # Handle Player Animations
 func player_animations():
 	particle_trails.emitting = false
-	
 	if is_on_floor():
 		if abs(velocity.x) > 0:
 			particle_trails.emitting = true
 			player_sprite.play("Walk", 1.5)
+			$WalkSound.playing = true
 		else:
 			player_sprite.play("Idle")
 	else:
@@ -86,7 +85,6 @@ func death_tween():
 	await tween.finished
 	global_position = spawn_point.global_position
 	await get_tree().create_timer(0.3).timeout
-	AudioManager.respawn_sfx.play()
 	respawn_tween()
 
 func respawn_tween():
@@ -104,6 +102,6 @@ func jump_tween():
 # Reset the player's position to the current level spawn point if collided with any trap
 func _on_collision_body_entered(_body):
 	if _body.is_in_group("Traps"):
-		AudioManager.death_sfx.play()
+		$DeathSound.playing = true 
 		death_particles.emitting = true
 		death_tween()

@@ -1,10 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://w7m6tehvvy3g"]
+[gd_scene load_steps=28 format=3 uid="uid://w7m6tehvvy3g"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_qt7d6"]
 [ext_resource type="Texture2D" uid="uid://kpuagtankl31" path="res://Berie's_Adventure_Seaside_Asset_Pack_Free/Spritesheet/character_berie_idle.png" id="2_de4va"]
 [ext_resource type="Texture2D" uid="uid://dxp77wq60c2rr" path="res://Assets/Textures/CloudTexture.png" id="3_8vxmb"]
 [ext_resource type="Texture2D" uid="uid://cmordt22pge7i" path="res://Berie's_Adventure_Seaside_Asset_Pack_Free/Spritesheet/character_berie_run.png" id="3_ax242"]
 [ext_resource type="Texture2D" uid="uid://bxwfqchh2jshm" path="res://Berie's_Adventure_Seaside_Asset_Pack_Free/Spritesheet/character_berie_jump.png" id="3_uv7ed"]
+[ext_resource type="AudioStream" uid="uid://bqb5s6nls6cin" path="res://Assets/Sound/FX/vgdeathsound.wav" id="6_4c26u"]
+[ext_resource type="AudioStream" uid="uid://bnvda6c4tshh0" path="res://Assets/Sound/FX/30_Jump_03.wav" id="7_rnh5i"]
+[ext_resource type="AudioStream" uid="uid://kp47tmh8mpy" path="res://Assets/Sound/FX/03_Step_grass_03.wav" id="8_tg6ds"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5oq7e"]
 atlas = ExtResource("2_de4va")
@@ -198,5 +201,14 @@ scale_amount_min = 15.0
 scale_amount_max = 30.0
 scale_amount_curve = SubResource("Curve_m2jh0")
 color_ramp = SubResource("Gradient_3gc37")
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_4c26u")
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_rnh5i")
+
+[node name="WalkSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tg6ds")
 
 [connection signal="body_entered" from="Collision" to="." method="_on_collision_body_entered"]

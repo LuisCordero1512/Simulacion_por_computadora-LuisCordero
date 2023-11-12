@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxheugbsrha17"]
+
+[ext_resource type="AudioStream" uid="uid://b35wfa80qn0pe" path="res://Assets/Sound/FX/GameOver.wav" id="4_gx0tx"]
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="4_ufk6e"]
+[ext_resource type="FontFile" uid="uid://qgc4vi5osk7v" path="res://Assets/Fonts/Star Choco.ttf" id="9_b1euq"]
+[ext_resource type="Texture2D" uid="uid://h15ojxooge3o" path="res://Berie's_Adventure_Seaside_Asset_Pack_Free/PNG/background.png" id="10_uaghv"]
+
+[node name="End_Level" type="Node2D"]
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("4_ufk6e")
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+
+[node name="ContadorLabel2" type="Label" parent="UserInterface"]
+offset_left = 403.0
+offset_top = 76.0
+offset_right = 836.0
+offset_bottom = 139.0
+theme_override_colors/font_color = Color(0.910156, 0.730469, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("9_b1euq")
+theme_override_font_sizes/font_size = 50
+text = "Gracias por Jugar"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(574, 324.625)
+scale = Vector2(3.56875, 3.55972)
+texture = ExtResource("10_uaghv")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gx0tx")
+autoplay = true
